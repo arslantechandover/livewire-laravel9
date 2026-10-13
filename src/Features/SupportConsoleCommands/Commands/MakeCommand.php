@@ -144,6 +144,11 @@ class MakeCommand extends FileManipulationCommand implements PromptsForMissingIn
             return;
         }
 
+        // Laravel 9 compatibility: laravel/prompts is not installed, so skip the optional questions...
+        if (! function_exists('Laravel\Prompts\confirm')) {
+            return;
+        }
+
         if(
             confirm(
                 label: 'Do you want to make this an inline component?',
